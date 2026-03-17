@@ -22,12 +22,12 @@ notebook = {
     "quantidade": 9
 }
 rtx7090 = {
-    "nome": "Nvidea GPU",
+    "nome": "Nvidea GPU RTX7090",
     "preco": 85670.89,
     "quantidade": 0
 
 }
-estoque = [mouse, teclado, monitor, notebook]
+estoque = [mouse, teclado, monitor, notebook, rtx7090]
 valor_total = 0
 intens_caros = []
 for n in estoque:
@@ -40,8 +40,8 @@ produtos_none = [n["nome"] for n in estoque if n["quantidade"] == 0 ]
 
 
 print(f"Itens caros :{intens_caros}\n")
-print(f"Valor tota do estoque:{valor_total}")
-print(f"Sem estoque{produtos_none}")
+print(f"Valor total do estoque:{valor_total}\n")
+print(f"Sem estoque: {produtos_none}")
 
 
 

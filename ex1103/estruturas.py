@@ -35,13 +35,20 @@ for n in estoque:
     if n["preco"] > 500:
         intens_caros.append(n)
 
-produtos_none = [n["nome"] for n in estoque if n["quantidade"] == 0 ]
+produtos_none = [n for n in estoque if n["quantidade"] == 0 ]
 
 
+for n in intens_caros:
+    print(f"Itens caros :\nNome:{n["nome"]}\nPreço:{n["preco"]}\n\n")
+    
 
-print(f"Itens caros :{intens_caros}\n")
+
+for n in produtos_none:
+    print(f"Itens fora de estoque :\nNome:{n['nome']}\n\n")
+    
+
 print(f"Valor total do estoque:{valor_total}\n")
-print(f"Sem estoque: {produtos_none}")
+
 
 
 

@@ -14,7 +14,6 @@ class JogoDaVelha:
             print(n)
             print("\n")
 
-
     def fazer_jogada(self, posicao_jogada, jogador):
         for n in range(3):
             for x in range(3) :

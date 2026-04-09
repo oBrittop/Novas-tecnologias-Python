@@ -117,7 +117,7 @@ conf_level = {
     1: {
         "vel_min" : 2,
         "vel_max" :3,
-        "quantidade_inimigos": 2
+        "quantidade_inimigos": 1
                
     },
     2: {
@@ -128,7 +128,7 @@ conf_level = {
     3: {
         "vel_min" : 6,
         "vel_max" :8,
-        "quantidade_inimigos": 8      
+        "quantidade_inimigos": 8     
     }
     
 }
@@ -139,18 +139,18 @@ mostrar_mensagem = False
 jogador = Jogador(375, 275, "direita")
 inimigos = [#x, y, velocidade, 
     Inimigo(random.randint(0, 750), random.randint(0, 100), random.randint(2, 4)) 
-    for _ in range(4)
+    for _ in range(2)
 ]
 
 # lista inimigos_rapidos por isso (adiciona os rápidos na lista principal)
 for _ in range(2):
     inimigos.append(InimigoRapido(random.randint(0, 750), random.randint(0, 100), random.randint(6, 9)))
     
-for _ in range(2):
+for _ in range(1):
     inimigos.append(InimigoBig(random.randint(0, 750), random.randint(0, 100), random.randint(1, 3)))
 
 
-estado = {"pontuacao": 0, "vidas": 8, "rodando": True}
+estado = {"pontuacao": 0, "vidas": 80, "rodando": True}
 timer_spawn = 0
 balas_no_jogo =[]
 while estado["rodando"]:
@@ -175,7 +175,7 @@ while estado["rodando"]:
         
     
 # Atualiza inimigos    
-    for ini in inimigos:
+    for ini in inimigos: 
         ini.perseguir(jogador)
         if jogador.colidiu_com(ini):
             estado["vidas"] -= 1
@@ -187,7 +187,7 @@ while estado["rodando"]:
     if estado["pontuacao"] < 500:#Nivel 1
         timer_spawn += 1
         for n in range(conf_level[1]["quantidade_inimigos"]):
-            if timer_spawn % 270 == 0:
+            if timer_spawn % 470 == 0:
                 inimigos.append(Inimigo(random.randint(0, 750), 0, random.randint(conf_level[1]["vel_min"], conf_level[1]["vel_max"])))
                 #inimigos.append(InimigoRapido(random.randint(0, 750), 0, random.randint(6, 7)))
 

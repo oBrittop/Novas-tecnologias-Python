@@ -1,12 +1,12 @@
 class Usuario:
-    def __init__(self, id, nome, email):
-        self.__id = id
+    def __init__(self, iid, nome, email):
+        self.__iid = iid
         self.nome = nome
         self.email = email
 # --- GETTERS ---
     @property
-    def id(self):
-        return self.__id
+    def iid(self):
+        return self.__iid
 
     @property
     def nome(self):
@@ -28,7 +28,7 @@ class Usuario:
             self.__email = novo_email
         else:
             print(f"\nErro: E-mail '{novo_email}' inválido!")
-            print(f"Problema com datastro id:{self.id}")
+            print(f"Problema com datastro id:{self.iid}")
             self.__email = "INVALIDO!"
 class GerenciadorUsuario:
     def __init__(self):
@@ -40,7 +40,7 @@ class GerenciadorUsuario:
 
     def remover_usuario_por_id(self, id_busca):
         tamanho_original = len(self.lista)
-        self.lista = [u for u in self.lista if u.id != id_busca]
+        self.lista = [u for u in self.lista if u.iid != id_busca]
         if len(self.lista) < tamanho_original:
             print("Id removido com sucesso")
         else:
@@ -49,7 +49,7 @@ class GerenciadorUsuario:
     def listar_usuarios(self):
         print("--Lista de Usuarios")
         for n in self.lista:
-            print(f"Id: {n.id}\nNome:{n.nome}\nEmail:{n.email}")
+            print(f"Id: {n.iid}\nNome:{n.nome}\nEmail:{n.email}")
             print("-----------------------------")
 gerenciador = GerenciadorUsuario()
 user1 = Usuario(1, "Gustavo", "gusta@email.com")

@@ -103,46 +103,82 @@ notas_brutas = [
     {"aluno": "Sofia", "materia": "Fisica", "nota": 9.5}
 ]
 
-def media(notas,qtde_prova):
-    for n in notas:
-        n += n
-        nota_media = (n/qtde_prova)
-
-boletins = {
-    "Ana" : {
-        "medias_dis":{
-            "matematica": 0.0,
-            "fisica" : 0.0 
-        },
-        "media_geral":0.0,
-        "status":"aproavdo"
-    }
-}
-    # {"aluno": "Ana", 
-    #  "materia": "Matematica", 
-    #  "nota": 8.5},
 
 
-for n in notas_brutas:
-    nome_aluno = n["aluno"]
-    if nome_aluno in n["aluno"]:
-        #daqui pra baixo e para guardar a qtde de prova por materia 
-        dic_materias={
-                     "Matematica": 0,
-                     "Fisica": 0,
-                     "Biologia": 0,
-                      "Quimica": 0,
-                     "Historia": 0
-            }
-        for materia in dic_materias:
-                if n["materia"] == materia:
-                    qtde_prova += 1
-        media = media(n["nota"], qtde_prova)   
-
-
-
-        medias_diciplinas = {
-            "media" : media,
             
 
-        }
+rascunho = {}
+
+for aluno_da_vez in notas_brutas:
+    nome_do_aluno = aluno_da_vez["aluno"]
+    materia = aluno_da_vez["materia"]
+    nota = aluno_da_vez["nota"]
+    
+    
+    #aluno novo do dicionario
+    if nome_do_aluno  not in rascunho:
+        rascunho[nome_do_aluno] = {}
+        
+    if nome_do_aluno in rascunho:
+        if materia not in rascunho[nome_do_aluno]:
+            rascunho[nome_do_aluno][materia] = [nota]
+            
+        elif materia in rascunho[nome_do_aluno]:
+            rascunho[nome_do_aluno][materia].append(nota)
+
+
+#tratar notas Logica central
+for nome_do_aluno in rascunho:
+    for materia in rascunho[nome_do_aluno]:
+        lista_de_notas = rascunho[nome_do_aluno][materia]
+        
+        while len(lista_de_notas) > 2:
+            valor_remover = min(lista_de_notas)
+            lista_de_notas.remove(valor_remover)
+        rascunho[nome_do_aluno][materia] = lista_de_notas
+
+
+
+
+boletins = {}
+
+for nome_do_aluno in rascunho:
+    medias_disciplinas = {}
+    lista_medias = []
+    for materia in rascunho[nome_do_aluno]:
+        notas = rascunho[nome_do_aluno][materia]            
+        media = round(sum(notas) / len(notas), 2)
+        medias_disciplinas[materia] = media
+        lista_medias.append(media)
+    media_geral = round(sum(lista_medias) / len(lista_medias), 2) 
+
+    if media_geral >= 7:
+        status = "Aprovado"
+    elif media_geral >= 5:
+        status = "Recuperacao"
+    else:
+        status = "Reprovado"
+    boletins[nome_do_aluno] = {
+        "medias_disciplinas": medias_disciplinas,
+        "media_geral": media_geral,
+        "status": status
+    }
+
+print(boletins)
+# 1. Transformamos o dicionário em uma lista de itens (nome, dados) para poder ordenar
+# O boletins.items() nos entrega algo como: [('Ana', {...}), ('Sofia', {...})]
+lista_para_ordenar = list(boletins.items())
+
+# 2. Aplicamos a Ordenação Complexa
+# O segredo está no sinal de menos (-) antes da média
+ranking_completo = sorted(
+    lista_para_ordenar, 
+    key=lambda x: (-x[1]["media_geral"], x[0])
+)
+
+ranking_final = [aluno[0] for aluno in ranking_completo]
+
+
+print("--- RANKING FINAL ---")
+print(ranking_final)
+

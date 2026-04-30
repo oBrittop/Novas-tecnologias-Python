@@ -24,7 +24,5 @@ imagem_binaria = np.zeros_like(imagem)
 
 
 imagem_binaria[imagem >= 128] = 255
-
-
 print("\nImagem Binária (Preto e Branco):")
 print(imagem_binaria)

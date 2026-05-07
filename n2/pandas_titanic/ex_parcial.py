@@ -13,7 +13,8 @@ print(df.head())
 print(df.info())
 print(df.shape)
 print("-"*150)
-print(df.describe)
+descito = df.describe
+print(descito)
 
 print("Quantidade distintintas de Classes:",df["Pclass"].nunique())
 
